@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\..\..\..\Program Files %28x86%29\dtSearch Developer\lib\engine\NetStd\dtSearchNetStdApi.dll" Link="dtSearchNetStdApi.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="dtSearchNetStdApi">
+      <HintPath>C:\Program Files (x86)\dtSearch Developer\lib\engine\NetStd\dtSearchNetStdApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+    <Content Include="C:\Program Files (x86)\dtSearch Developer\lib\engine\win\x64\dtSearchEngine.dll" Link="dtSearchEngine.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">
+    <Content Include="C:\Program Files %28x86%29\dtSearch Developer\lib\engine\linux\x64\libdtSearchEngine.so" Link="libdtSearchEngine.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">
+    <Content Include="C:\Program Files %28x86%29\dtSearch Developer\lib\engine\macos\x64\libdtSearchEngine.dylib" Link="libdtSearchEngine.dylib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
